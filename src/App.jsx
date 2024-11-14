@@ -2,21 +2,15 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-function App() {
-  const categories = [
-    "animation",
-    "classic",
-    "comedy",
-    "drama",
-    "horror",
-    "family",
-    "mystery",
-    "western",
-  ];
+// components
+import categories from "./components/Categories";
+import NavTab from "./components/NavTab";
+import SearchBar from "./components/SearchBar";
 
+function App() {
   const [movies, setMovies] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("animation");
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   // Fetch movies from the selected category
@@ -51,36 +45,17 @@ function App() {
 
       {/* Category Tabs */}
       <ul className="nav nav-tabs mb-4">
-        {categories.map((category) => (
-          <li className="nav-item" key={category}>
-            <button
-              className={`nav-link ${
-                selectedCategory === category ? "active" : ""
-              }`}
-              onClick={() => {
-                setSelectedCategory(category);
-                setQuery(""); // Reset search when category changes
-              }}
-            >
-              {category.replace("-", " ")}
-            </button>
-          </li>
+        {categories.map((category, index) => (
+          <NavTab
+            category={category}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
         ))}
       </ul>
 
       {/* Search Bar */}
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search for a movie..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button className="btn btn-primary" onClick={handleSearch}>
-          Search
-        </button>
-      </div>
+      <SearchBar />
 
       {/* Movies Grid */}
       <div className="row">
