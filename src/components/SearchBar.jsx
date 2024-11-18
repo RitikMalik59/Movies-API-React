@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 
-const SearchBar = () => {
+const SearchBar = ({ handleSearch }) => {
   const [query, setQuery] = useState("");
 
-  const handleSearch = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e.target.value);
     console.log(query);
+    handleSearch(query);
+    // setQuery("");
   };
   return (
-    <form action="" onSubmit={handleSearch}>
+    <form action="" onSubmit={handleSubmit}>
       <div className="input-group mb-3">
         <input
           type="text"

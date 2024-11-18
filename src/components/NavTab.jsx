@@ -7,7 +7,7 @@ const NavTab = ({ category, selectedCategory, setSelectedCategory }) => {
         className={`nav-link ${selectedCategory === category ? "active" : ""}`}
         onClick={() => {
           setSelectedCategory(category);
-          //   setQuery(""); // Reset search when category changes
+          setQuery(""); // Reset search when category changes
         }}
       >
         {category.replace("-", " ")}
